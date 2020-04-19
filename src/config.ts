@@ -5,6 +5,7 @@ export default {
         database: process.env.MONGO_DATABASE || "GraphQLBoilerPlate"
     },
     server: {
-        port: 4000
+        port: 4000,
+        jwt: process.env.JWT_TOKEN
     }
 }
