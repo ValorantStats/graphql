@@ -54,7 +54,7 @@ export class Guns extends BaseEntity {
 
     @Column()
     @Field()
-    price: String
+    price: Number
 
     @Column()
     @Field()

@@ -2,13 +2,14 @@ import 'reflect-metadata'
 import express from 'express';
 import config from './config'
 import { ApolloServer } from 'apollo-server-express';
-import { buildSchema, AuthChecker } from "type-graphql";
+import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import cookieParser from 'cookie-parser'
 import jwt from 'express-jwt'
 import { Guns } from './entity/guns';
-import { UsersResolver } from './resolvers/guns';
+import { GunsResolver } from './resolvers/guns';
 import { authChecker } from './misc';
+import morgan from 'morgan'
 
 async function bootstrap() {
     await createConnection({
@@ -24,7 +25,7 @@ async function bootstrap() {
     const server = new ApolloServer({ 
         schema: await buildSchema({
             validate: false,
-            resolvers: [UsersResolver],
+            resolvers: [GunsResolver],
             authChecker,
         }),
         playground: {
@@ -34,6 +35,7 @@ async function bootstrap() {
         },
         context: ({req, res}) => ({req, res})
     });
+    app.use(morgan('dev'))
     app.use(cookieParser())
     app.use(jwt({
         secret: config.server.jwt,

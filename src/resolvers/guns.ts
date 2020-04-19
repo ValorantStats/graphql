@@ -4,8 +4,8 @@ import { Guns } from "../entity/guns";
 @Resolver(Guns)
 export class GunsResolver {
     @Authorized("ADMIN")
-    @Query(() => String)
-    async helloWorld() {
-        return 'Hello World!'
+    @Query(() => [Guns])
+    async listGuns() {
+        return await Guns.find({})
     }
 }
