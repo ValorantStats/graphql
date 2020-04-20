@@ -50,6 +50,10 @@ export class Guns extends BaseEntity {
     
     @Column()
     @Field()
+    image: String
+
+    @Column()
+    @Field()
     category: String
 
     @Column()
@@ -61,7 +65,7 @@ export class Guns extends BaseEntity {
     primaryFire: PrimaryFire
 
     @Column()
-    @Field()
+    @Field({ nullable: true })
     altFire: AltFire
 
     @Column()
@@ -70,7 +74,7 @@ export class Guns extends BaseEntity {
 
     @Column()
     @Field()
-    ammoSize: String
+    ammoSize: Number
 
     @Column()
     @Field()
